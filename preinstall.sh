@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-#-------------------------------------------------------------------------
-#         _          _    __  __      _   _
-#        /_\  _ _ __| |_ |  \/  |__ _| |_(_)__
-#       / _ \| '_/ _| ' \| |\/| / _` |  _| / _|
-#      /_/ \_\_| \__|_||_|_|  |_\__,_|\__|_\__|
-#  Saoirse Linux Post Arch Install Setup and Config
-#-------------------------------------------------------------------------
+#---------------------------------------------------------
+#           ____                 _
+#          / ___|  ___  _ __ ___| |__   __ _
+#          \___ \ / _ \| '__/ __| '_ \ / _` |
+#           ___) | (_) | | | (__| | | | (_| |
+#          |____/ \___/|_|  \___|_| |_|\__,_|
+#
+#    Saoirse Linux Post Arch Install Setup and Config
+#---------------------------------------------------------
 
 echo "-------------------------------------------------"
 echo "Setting up mirrors for optimal download - US Only"
@@ -59,19 +61,19 @@ mkdir /mnt/boot
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}1" /mnt/boot/
 
-echo "--------------------------------------"
-echo "-- Arch Install on Main Drive       --"
-echo "--------------------------------------"
-pacstrap /mnt base base-devel linux linux-firmware vim nano sudo --noconfirm --needed
-genfstab -U /mnt >> /mnt/etc/fstab
+echo "---------------------------------------"
+echo "--   Seoirse Install on Main Drive   --"
+echo "---------------------------------------"
+pacstrap /mnt base base-devel linux linux-firmware neovim sudo --noconfirm --needed
+fgenstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 
-echo "--------------------------------------"
-echo "-- Bootloader Systemd Installation  --"
-echo "--------------------------------------"
-bootctl install
+echo "-------------------------------------"
+echo "--  Bootloader Runit Installation  --"
+echo "-------------------------------------"
+
 cat <<EOF > /boot/loader/entries/arch.conf
-title Arch Linux  
+title Saoirse Linux  
 linux /vmlinuz-linux  
 initrd  /initramfs-linux.img  
 options root=${DISK}1 rw
@@ -80,11 +82,11 @@ EOF
 echo "--------------------------------------"
 echo "--          Network Setup           --"
 echo "--------------------------------------"
-pacman -S networkmanager dhclient --noconfirm --needed
-systemctl enable --now NetworkManager
+pacman -S networkmanager dhcpcd --noconfirm --needed
+sudo ln -s /etc/runit/sv/NetworkManager /run/runit/service
 
 echo "--------------------------------------"
-echo "--      Set Password for Root       --"
+echo "--       Set Password for Root      --"
 echo "--------------------------------------"
 echo "Enter password for root user: "
 passwd root
