@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # Created by Liam Powell (gfelipe099)
 # A compilation of all the files from ArchMatic's repository
-# Made for ChrisTitusTech
+# Made for Saoirse Linux
 
 #-------------------------------------------------------------------------
-#      _          _    __  __      _   _
-#     /_\  _ _ __| |_ |  \/  |__ _| |_(_)__
-#    / _ \| '_/ _| ' \| |\/| / _` |  _| / _|
-#   /_/ \_\_| \__|_||_|_|  |_\__,_|\__|_\__|
-#  Arch Linux Post Install Setup and Config
+#         _          _    __  __      _   _
+#        /_\  _ _ __| |_ |  \/  |__ _| |_(_)__
+#       / _ \| '_/ _| ' \| |\/| / _` |  _| / _|
+#      /_/ \_\_| \__|_||_|_|  |_\__,_|\__|_\__|
+#  Saoirse Linux Post Arch Install Setup and Config
 #-------------------------------------------------------------------------
 
-# Verify Arch Linux is running
+# Verify Arch Linux based is running
 if [ ! -f /usr/bin/pacman ]; then
     echo "Pacman Package Manager was not found in this system, execution aborted."
     exit
@@ -19,8 +19,8 @@ if [ ! -f /usr/bin/pacman ]; then
         pacman -Sy && sudo pacman -Syyy && pacman -S lsb-release --noconfirm --needed &>/dev/null
         os=$(lsb_release -ds | sed 's/"//g')
 
-if [ "${os}" != "Arch Linux" ]; then
-    echo "You must be using Arch Linux to execute this script."
+if [ "${os}" != "Artix Linux" ]; then
+    echo "You must be using Artix Linux to execute this script."
     exit 1
 fi
 
