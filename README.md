@@ -1,36 +1,37 @@
-# Titus ArchMatic Installer Script
+# Saoirse ArchMatic Installer Script
 
 <img src="https://i.imgur.com/Yn29sze.png" />
 
-This README contains the steps I do to install and configure a fully-functional Arch Linux installation containing a desktop environment, all the support packages (network, bluetooth, audio, printers, etc.), along with all my preferred applications and utilities. The shell scripts in this repo allow the entire process to be automated.)
+This README contains the steps needed to install and configure a Saoirse Linux installation containing a window manager, all the support packages (network, bluetooth, audio, etc.). The shell scripts in this repo allow the entire process to be automated.)
+Through the process of learning we will eventually make a distro from scratch and mantain it, but it will take a long time. Any help and support will be appreciated!
 
 ---
 
-## Setup Boot and Arch ISO on USB key
+## Setup Boot and Artix ISO on USB key
 
-First, setup the boot USB, boot arch live iso, and run the `preinstall.sh` from terminal. 
+First, setup the boot USB, boot Artix Live ISO, and run the `preinstall.sh` from terminal. 
 
-### Arch Live ISO (Pre-Install)
+### Artix Live ISO (Pre-Install)
 
 This step installs arch to your hard drive. *IT WILL FORMAT THE DISK*
 
 ```bash
-wget https://raw.githubusercontent.com/ChrisTitusTech/ArchMatic/master/preinstall.sh
+wget https://raw.githubusercontent.com/saoirse-linux/ArchMatic/master/preinstall.sh
 sh preinstall.sh
 reboot
 ```
 
-### Arch Linux First Boot
+### Artix Linux First Boot
 
 ```bash
 pacman -S --no-confirm pacman-contrib curl git
-git clone https://github.com/ChrisTitusTech/ArchMatic
+git clone https://github.com/saoirse-linux/ArchMatic
 cd ArchMatic
 ./0-setup.sh
 ./1-base.sh
 ./2-software-pacman.sh
 ./3-software-aur.sh
-./9-post-setup.sh
+./4-post-setup.sh
 ```
 
 ### Don't just run these scripts. Examine them. Customize them. Create your own versions.
@@ -44,7 +45,7 @@ To boot I use `systemd` because it's minimalist, comes built-in, and since the L
 
 I also install the LTS Kernel along side the rolling one, and configure my bootloader to offer both as a choice during startup. This enables me to switch kernels in the event of a problem with the rolling one.
 
-### Troubleshooting Arch Linux
+### Troubleshooting Artix Linux
 
 __[Arch Linux Installation Gude](https://github.com/rickellis/Arch-Linux-Install-Guide)__
 
